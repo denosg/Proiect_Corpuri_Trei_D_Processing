@@ -40,6 +40,8 @@ public void setup() {
 
 boolean showMatrixOnly = false;
 
+//TODO: add matrix display to work
+
 public void draw() {
     background(255);
     drawText();
@@ -126,7 +128,6 @@ public void drawObject(int type) {
             println("Invalid choice");
             break;
     }
-
     popMatrix();
 }
 

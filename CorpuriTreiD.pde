@@ -21,6 +21,8 @@ void setup() {
 
 boolean showMatrixOnly = false;
 
+//TODO: add matrix display to work
+
 void draw() {
     background(255);
     drawText();

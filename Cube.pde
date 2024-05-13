@@ -13,6 +13,7 @@ class Cube {
     
     void showMatrix() {
         stroke(0, 0, 100);
+        noFill(); // No fill color
         cubeShape.disableStyle();
         shape(cubeShape);
     }

@@ -39,4 +39,9 @@ class Cylinder {
         }
         endShape(CLOSE);
     }
+    void showMatrix() {
+        stroke(0, 0, 100); // Set wireframe color
+        noFill(); // No fill
+        showCylinder(); // Call showCylinder to draw wireframe
+    }
 }

@@ -21,8 +21,6 @@ void setup() {
 
 boolean showMatrixOnly = false;
 
-//TODO: add matrix display to work
-
 void draw() {
     background(255);
     drawText();
@@ -38,7 +36,7 @@ void drawScene() {
     if (currentChoice != -1) {
         drawObject(currentChoice);
     }
-
+    
     // Call drawObject based on user input
     if (localKeyPressed == 1 && currentChoice != -1) {
         drawObject(currentChoice);
@@ -59,7 +57,7 @@ void drawText() {
         fill(0); // Set text color to black
         rectMode(CORNER); // Set rectangle mode to CORNER
         fill(200); // Set background color to grey
-        rect(-850, 760, 3000, 120); // Draw a grey rectangle behind the text
+        rect( -850, 760, 3000, 120); // Draw a grey rectangle behind the text
         fill(0); // Set text color to black
         textSize(22);
         text("Click to see wireframe. Hold mouse to rotate. Scroll to change size. ", 20, 450);
@@ -72,8 +70,8 @@ void drawObject(int type) {
     translate(600, 0, 0);
     rotateX(radians(90));
     rotateY(radians(frameCount * 1.2));
-
-    switch (type) {
+    
+    switch(type) {
         case 1:
             if (!showMatrixOnly) {
                 cube.showCube();
@@ -82,7 +80,11 @@ void drawObject(int type) {
             }
             break;
         case 2:
+            if (!showMatrixOnly) {
                 cylinder.showCylinder();
+            } else {
+                cylinder.showMatrix();
+            }
             break;
         case 3:
             if (!showMatrixOnly) {
@@ -95,7 +97,7 @@ void drawObject(int type) {
             if (!showMatrixOnly) {
                 cone.showCone();
             } else {
-                cone.showCone();
+                cone.showMatrix();
             }
             break;
         case 5:
@@ -106,11 +108,12 @@ void drawObject(int type) {
             }
             break;
         default:
-            println("Invalid choice");
-            break;
+        println("Invalid choice");
+        break;
     }
     popMatrix();
 }
+
 
 void drawMenu() {
     // Draw menu in 2D space
@@ -129,6 +132,7 @@ void drawMenu() {
 void mousePressed() {
     if (mouseButton == LEFT) {
         showMatrixOnly = !showMatrixOnly;
+        print(showMatrixOnly);
     }
     if (mouseButton == RIGHT) {
         showMatrixOnly = false;

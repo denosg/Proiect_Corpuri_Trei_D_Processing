@@ -9,10 +9,15 @@ int time;
 int currentChoice = -1;
 int localKeyPressed = 0;
 
+float angleX = 0;  
+float angleY = 0;  
+float prevMouseX = 0;  
+float prevMouseY = 0;  
+
 PeasyCam cam;
 
 void setup() {
-    size(852, 480, P3D);
+    size(1920, 1080, P3D);
     cam = new PeasyCam(this, 2000);
     cube.createCube();
     sphere.createSphere();
@@ -26,12 +31,16 @@ void draw() {
     drawText();
     // Draw 3D scene with PeasyCam
     drawScene();
+    mouseControls();
     // Draw menu overlay
     drawMenu();
 }
 void drawScene() {
     ambientLight(255, 255, 255);
-    rotateY(frameCount * 0.02);
+    cam.beginHUD();
+    translate(width/2, height/2, 500); 
+    rotateX(angleX);                 
+    rotateY(angleY);
     // Draw the current choice
     if (currentChoice != -1) {
         drawObject(currentChoice);
@@ -41,6 +50,7 @@ void drawScene() {
     if (localKeyPressed == 1 && currentChoice != -1) {
         drawObject(currentChoice);
     }
+    cam.endHUD();
 }
 
 void keyPressed() {
@@ -67,9 +77,7 @@ void drawText() {
 
 void drawObject(int type) {
     pushMatrix();
-    translate(600, 0, 0);
-    rotateX(radians(90));
-    rotateY(radians(frameCount * 1.2));
+    rotateY(radians(frameCount * 0.2));
     
     switch(type) {
         case 1:
@@ -137,4 +145,14 @@ void mousePressed() {
     if (mouseButton == RIGHT) {
         showMatrixOnly = false;
     }
+}
+
+void mouseControls()
+{
+    float deltaX = mouseY - prevMouseX;
+    float deltaY = mouseX - prevMouseY;
+    angleX += deltaX / width * 10;  
+    angleY += deltaY / height * 10;
+    prevMouseX = mouseY;
+    prevMouseY = mouseX;
 }
